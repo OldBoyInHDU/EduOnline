@@ -24,11 +24,37 @@ public class UploadServiceImpl implements UploadService {
     @Override
     public String uploadDoc(MultipartFile file) throws IOException {
         System.out.println(file.getContentType());
-        if(!uploadProperties.getAllowType().equals(file.getContentType())) {
-            throw new IOException("文件上传类型错误");
+        if(!uploadProperties.getAllowType().get(0).equals(file.getContentType())) {
+            throw new IOException("文档上传类型错误");
         }
         String fileName = UploadUtils.generateFileName(file.getOriginalFilename());
-        File newFile = new File(uploadProperties.getPath() + fileName);
+        File newFile = new File(uploadProperties.getPath()+"\\doc\\" + fileName);
+        file.transferTo(newFile);
+        System.out.println(newFile.getPath());
+        return fileName;
+    }
+
+    @Override
+    public String uploadVideo(MultipartFile file) throws IOException {
+        System.out.println(file.getContentType());
+        if(!uploadProperties.getAllowType().get(1).equals(file.getContentType())) {
+            throw new IOException("视频上传类型错误");
+        }
+        String fileName = UploadUtils.generateFileName(file.getOriginalFilename());
+        File newFile = new File(uploadProperties.getPath()+"\\video\\" + fileName);
+        file.transferTo(newFile);
+        System.out.println(newFile.getPath());
+        return fileName;
+    }
+
+    @Override
+    public String uploadCourseware(MultipartFile file) throws IOException {
+        System.out.println(file.getContentType());
+        if(!uploadProperties.getAllowType().get(0).equals(file.getContentType())) {
+            throw new IOException("视频上传类型错误");
+        }
+        String fileName = UploadUtils.generateFileName(file.getOriginalFilename());
+        File newFile = new File(uploadProperties.getPath()+"\\courseware\\" + fileName);
         file.transferTo(newFile);
         System.out.println(newFile.getPath());
         return fileName;

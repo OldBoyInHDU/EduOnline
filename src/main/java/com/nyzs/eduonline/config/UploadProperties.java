@@ -3,6 +3,8 @@ package com.nyzs.eduonline.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * @author ：RukiHuang
  * @description：文件上传
@@ -14,7 +16,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "file.upload")
 public class UploadProperties {
     private String path;
-    private String allowType;
+    private List<String> allowTypeList;
 
     public String getPath() {
         return path;
@@ -24,11 +26,11 @@ public class UploadProperties {
         this.path = path;
     }
 
-    public String getAllowType() {
-        return allowType;
+    public List<String> getAllowType() {
+        return allowTypeList;
     }
 
-    public void setAllowType(String allowType) {
-        this.allowType = allowType;
+    public void setAllowType(List<String> allowTypeList) {
+        this.allowTypeList = allowTypeList;
     }
 }

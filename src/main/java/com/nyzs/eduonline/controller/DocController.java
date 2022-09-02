@@ -64,10 +64,10 @@ public class DocController {
         String filename = null;
         try {
             filename = uploadService.uploadDoc(file);
-            return ResponseResult.ok(filename, "文件上传成功");
+            return ResponseResult.ok(filename, "文档上传成功");
         } catch (IOException e) {
             logger.error(e.getMessage());
-            return ResponseResult.failed(e.getMessage(),"文件上传失败");
+            return ResponseResult.failed(e.getMessage(),"文档上传失败");
         }
 
     }
