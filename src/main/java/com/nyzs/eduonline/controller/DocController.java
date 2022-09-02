@@ -4,13 +4,16 @@ import com.github.pagehelper.PageInfo;
 import com.nyzs.eduonline.bean.dto.DocFileInfoDto;
 import com.nyzs.eduonline.service.DocService;
 import com.nyzs.eduonline.bean.vo.ResponseResult;
+import com.nyzs.eduonline.service.UploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -26,6 +29,9 @@ public class DocController {
 
     @Autowired
     DocService docService;
+
+    @Autowired
+    UploadService uploadService;
 
     /**
      *
@@ -49,5 +55,20 @@ public class DocController {
             logger.error(e.getMessage());
             return ResponseResult.failed(e.getMessage(), "获取文档列表失败");
         }
+    }
+
+    @RequestMapping("/docUpload/uploadDoc")
+    public ResponseResult uploadDoc(
+            @RequestParam("file")MultipartFile file
+            ) {
+        String filename = null;
+        try {
+            filename = uploadService.uploadDoc(file);
+            return ResponseResult.ok(filename, "文件上传成功");
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+            return ResponseResult.failed(e.getMessage(),"文件上传失败");
+        }
+
     }
 }
