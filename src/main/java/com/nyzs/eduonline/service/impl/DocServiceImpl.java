@@ -1,5 +1,6 @@
 package com.nyzs.eduonline.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.nyzs.eduonline.bean.dto.DocFileInfoDto;
 import com.nyzs.eduonline.dao.DocDao;
 import com.nyzs.eduonline.service.DocService;
@@ -20,7 +21,9 @@ public class DocServiceImpl implements DocService {
     DocDao docDao;
 
     @Override
-    public List<DocFileInfoDto> getDocByPosOrTypeOrTitle(String pos, String type, String title) throws Exception {
+    public List<DocFileInfoDto> getDocByPosOrTypeOrTitle(int page, int pageSize, String pos, String type, String title) throws Exception {
+//        System.out.println("page:" + page + "---" + "size:" + pageSize);
+        PageHelper.startPage(page, pageSize);
         return docDao.getDocByPosOrTypeOrTitle(pos, type, title);
     }
 }

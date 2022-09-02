@@ -1,5 +1,6 @@
 package com.nyzs.eduonline.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.nyzs.eduonline.bean.dto.VideoFileInfoDto;
 import com.nyzs.eduonline.bean.vo.ResponseResult;
 import com.nyzs.eduonline.service.VideoService;
@@ -7,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -27,10 +29,14 @@ public class VideoController {
     VideoService videoService;
 
     @RequestMapping(value = "/videoManage/getVideoInfoByPosOrTitle")
-    public ResponseResult getVideoInfoByPosOrTitle(String pos, String title) {
+    public ResponseResult getVideoInfoByPosOrTitle(
+            @RequestParam(name = "page", required = true, defaultValue = "1") Integer page,
+            @RequestParam(name = "pageSize", required = true, defaultValue = "10") Integer pageSize,
+            String pos, String title) {
         try {
-            List<VideoFileInfoDto> videoFileInfoDtoList = videoService.getVideoInfoByPosOrTitle(pos, title);
-            return ResponseResult.ok(videoFileInfoDtoList, "视频列表查询成功");
+            List<VideoFileInfoDto> videoFileInfoDtoList = videoService.getVideoInfoByPosOrTitle(page, pageSize, pos, title);
+            PageInfo pageInfo = new PageInfo(videoFileInfoDtoList);
+            return ResponseResult.ok(pageInfo, "视频列表查询成功");
         } catch (Exception e) {
             logger.error(e.getMessage());
             return ResponseResult.failed(e.getMessage(), "视频列表查询失败");

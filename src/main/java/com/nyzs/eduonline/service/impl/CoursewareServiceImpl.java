@@ -1,5 +1,6 @@
 package com.nyzs.eduonline.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.nyzs.eduonline.bean.dto.CoursewareInfoDto;
 import com.nyzs.eduonline.dao.CoursewareDao;
 import com.nyzs.eduonline.service.CoursewareService;
@@ -20,7 +21,8 @@ public class CoursewareServiceImpl implements CoursewareService {
     CoursewareDao coursewareDao;
 
     @Override
-    public List<CoursewareInfoDto> getCoursewareByPosOrTitle(String pos, String title) throws Exception {
+    public List<CoursewareInfoDto> getCoursewareByPosOrTitle(int page, int pageSize, String pos, String title) throws Exception {
+        PageHelper.startPage(page, pageSize);
         return coursewareDao.getCoursewareByPosOrTitle(pos, title);
     }
 }

@@ -1,5 +1,6 @@
 package com.nyzs.eduonline.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.nyzs.eduonline.bean.dto.VideoFileInfoDto;
 import com.nyzs.eduonline.dao.VideoDao;
 import com.nyzs.eduonline.service.VideoService;
@@ -20,7 +21,8 @@ public class VideoServiceImpl implements VideoService {
     VideoDao videoDao;
 
     @Override
-    public List<VideoFileInfoDto> getVideoInfoByPosOrTitle(String pos, String title) throws Exception {
+    public List<VideoFileInfoDto> getVideoInfoByPosOrTitle(int page, int pageSize, String pos, String title) throws Exception {
+        PageHelper.startPage(page, pageSize);
         return videoDao.getVideoInfoByPosOrTitle(pos, title);
     }
 }

@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface VideoService {
 
-    List<VideoFileInfoDto> getVideoInfoByPosOrTitle(String pos, String title) throws Exception;
+    List<VideoFileInfoDto> getVideoInfoByPosOrTitle(int page, int pageSize, String pos, String title) throws Exception;
 }

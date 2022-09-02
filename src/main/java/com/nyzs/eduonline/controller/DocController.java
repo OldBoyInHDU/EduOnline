@@ -1,5 +1,6 @@
 package com.nyzs.eduonline.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.nyzs.eduonline.bean.dto.DocFileInfoDto;
 import com.nyzs.eduonline.service.DocService;
 import com.nyzs.eduonline.bean.vo.ResponseResult;
@@ -7,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -25,11 +27,24 @@ public class DocController {
     @Autowired
     DocService docService;
 
+    /**
+     *
+     * @param page 页数_第几页
+     * @param pageSize 单页面展示的数据的数量 / size是页面的数量 不要混淆
+     * @param pos
+     * @param type
+     * @param title
+     * @return
+     */
     @RequestMapping(value = "/docManage/getDocByPosOrTypeOrTitle")
-    public ResponseResult getDocByPosOrTypeOrTitle(String pos, String type, String title) {
+    public ResponseResult getDocByPosOrTypeOrTitle(
+            @RequestParam(name = "page", required = true, defaultValue = "1") Integer page,
+            @RequestParam(name = "pageSize", required = true, defaultValue = "10") Integer pageSize,
+            String pos, String type, String title) {
         try {
-            List<DocFileInfoDto> fileInfoListDto = docService.getDocByPosOrTypeOrTitle(pos, type, title);
-            return ResponseResult.ok( fileInfoListDto, "获取文档列表成功");
+            List<DocFileInfoDto> fileInfoListDto = docService.getDocByPosOrTypeOrTitle(page, pageSize, pos, type, title);
+            PageInfo pageInfo = new PageInfo(fileInfoListDto);
+            return ResponseResult.ok( pageInfo, "获取文档列表成功");
         } catch (Exception e) {
             logger.error(e.getMessage());
             return ResponseResult.failed(e.getMessage(), "获取文档列表失败");
