@@ -58,9 +58,16 @@
                 #{unit},
                 #{position},
                 #{storagePath},
-                DATE_FORMAT(#{uploadDate}, '%Y-%m-%d')
+                DATE_FORMAT(NOW(), '%Y-%m-%d')
                )
     </insert>
+
+    <delete id="deleteDocInfo" parameterType="Integer">
+        delete from
+            doc_file_info
+        where
+            id = #{id}
+    </delete>
 
     <!--&lt;!&ndash; id属性填写Dao文件里的函数名称 xxType是参数或是结果的类型根据情况填写 &ndash;&gt;
     &lt;!&ndash; 查询所有   &ndash;&gt;

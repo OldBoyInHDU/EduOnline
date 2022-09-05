@@ -33,24 +33,28 @@ public class DocController {
 
     /**
      *
-     * @param page 页数_第几页
-     * @param pageSize 单页面展示的数据的数量 / size是页面的数量 不要混淆
+     *
      * @param pos
      * @param type
      * @param title
      * @return
      */
-    @RequestMapping(value = "/docManage/getDocByPosOrTypeOrTitle")
-    public ResponseResult getDocByPosOrTypeOrTitle(
-            @RequestParam(name = "page", required = true, defaultValue = "1") Integer page,
-            @RequestParam(name = "pageSize", required = true, defaultValue = "10") Integer pageSize,
-            String pos, String type, String title) {
+    @RequestMapping(value = "/docManage/getDocByPosOrTypeOrTitle", method = RequestMethod.GET)
+    public ResponseResult getDocByPosOrTypeOrTitle(String pos, String type, String title) {
+
         try {
-            List<DocFileInfoDto> fileInfoListDto = docService.getDocByPosOrTypeOrTitle(page, pageSize, pos, type, title);
-            PageInfo pageInfo = new PageInfo(fileInfoListDto);
-            return ResponseResult.ok( pageInfo, "获取文档列表成功");
+            //pos 传进来是  片叶_开箱
+            String position = "";
+            if(pos != null && pos!= "") {
+                position = pos.split("_")[1];
+            }
+            List<DocFileInfoDto> fileInfoListDto = docService.getDocByPosOrTypeOrTitle(position, type, title);
+//            System.out.println(fileInfoListDto);
+//            PageInfo pageInfo = new PageInfo(fileInfoListDto);
+            return ResponseResult.ok(fileInfoListDto, "获取文档列表成功");
         } catch (Exception e) {
             logger.error(e.getMessage());
+            System.out.println(e.getCause());
             return ResponseResult.failed(e.getMessage(), "获取文档列表失败");
         }
     }
@@ -77,7 +81,25 @@ public class DocController {
             @RequestParam(name = "position") String position,
             @RequestParam(name = "type") String type,
             @RequestParam(name = "serverFileName")String serverFileName) {
-        docService.addDocInfo(position, type, serverFileName);
-        return null;
+        try {
+            docService.addDocInfo(position, type, serverFileName);
+            return ResponseResult.ok("提交成功");
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return ResponseResult.failed("提交失败", e.getMessage());
+        }
+
+    }
+
+    @RequestMapping(value = "/docManage/deleteDocInfo", method = RequestMethod.DELETE)
+    public ResponseResult deleteDocInfo(Integer id) {
+        try {
+            docService.deleteDocInfo(id);
+            return ResponseResult.ok("删除成功");
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return ResponseResult.failed("删除失败", e.getMessage());
+        }
+
     }
 }

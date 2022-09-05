@@ -9,5 +9,7 @@ import java.util.List;
 public interface DocDao {
     List<DocFileInfoDto> getDocByPosOrTypeOrTitle(String pos, String type, String title) throws Exception;
 
-    void addDocInfo(DocFileInfoDto docFileInfo);
+    void addDocInfo(DocFileInfoDto docFileInfo) throws Exception;
+
+    void deleteDocInfo(Integer id) throws Exception;
 }
