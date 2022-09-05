@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  * @author ：RukiHuang
- * @description：TODO
+ * @description：课件的Controller
  * @date ：2022/9/1 13:37
  */
 

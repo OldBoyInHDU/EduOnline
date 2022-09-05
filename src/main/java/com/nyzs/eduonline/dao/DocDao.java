@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface DocDao {
     List<DocFileInfoDto> getDocByPosOrTypeOrTitle(String pos, String type, String title) throws Exception;
+
+    void addDocInfo(DocFileInfoDto docFileInfo);
 }

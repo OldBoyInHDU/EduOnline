@@ -9,4 +9,5 @@ public interface DocService {
 
     List<DocFileInfoDto> getDocByPosOrTypeOrTitle(int page, int pageSize, String pos, String type, String title) throws Exception;
 
+    void addDocInfo(String position, String type, String serverFileName);
 }

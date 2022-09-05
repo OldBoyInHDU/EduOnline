@@ -29,14 +29,13 @@ public class DocFileInfoDto {
                 '}';
     }
 
-    public DocFileInfoDto(int id, String docFileName, String docFileType, String unit, String position, String storagePath, Date uploadDate) {
-        this.id = id;
+    public DocFileInfoDto(String docFileName, String docFileType, String unit, String position, String storagePath) {
         this.docFileName = docFileName;
         this.docFileType = docFileType;
         this.unit = unit;
         this.position = position;
         this.storagePath = storagePath;
-        this.uploadDate = uploadDate;
+        this.uploadDate = new Date();
     }
 
     public int getId() {

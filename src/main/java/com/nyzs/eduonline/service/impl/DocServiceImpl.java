@@ -26,4 +26,19 @@ public class DocServiceImpl implements DocService {
         PageHelper.startPage(page, pageSize);
         return docDao.getDocByPosOrTypeOrTitle(pos, type, title);
     }
+
+    @Override
+    public void addDocInfo(String position, String type, String serverFileName) {
+        String[] nameArray = serverFileName.split(" / ");
+        String[] positionArray = position.split("_");
+        String docFileName = nameArray[0];
+        String serverStorageName = nameArray[1];
+        String docFileType = type;
+        String unit = positionArray[0];
+        String pos = positionArray[1];
+        String storagePath = "/doc/" + serverStorageName;
+
+        DocFileInfoDto docFileInfo = new DocFileInfoDto(docFileName, docFileType, unit, pos, storagePath);
+        docDao.addDocInfo(docFileInfo);
+    }
 }

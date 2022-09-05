@@ -8,9 +8,7 @@ import com.nyzs.eduonline.service.UploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -21,7 +19,7 @@ import java.util.List;
  * @description：文档相关 （管理上传）
  * @date ：2022/9/1 9:37
  */
-
+@CrossOrigin(origins = "*",maxAge = 3600)
 @RequestMapping("/positionLearning")
 @RestController
 public class DocController {
@@ -57,7 +55,8 @@ public class DocController {
         }
     }
 
-    @RequestMapping("/docUpload/uploadDoc")
+//    @CrossOrigin(origins = "*",maxAge = 3600)
+    @RequestMapping(value = "/docUpload/uploadDoc", method = RequestMethod.POST)
     public ResponseResult uploadDoc(
             @RequestParam("file")MultipartFile file
             ) {
@@ -70,5 +69,15 @@ public class DocController {
             return ResponseResult.failed(e.getMessage(),"文档上传失败");
         }
 
+    }
+
+//    @CrossOrigin(origins = "*",maxAge = 3600)
+    @RequestMapping(value = "/docUpload/submitDocInfo", method = RequestMethod.POST)
+    public ResponseResult submitDocInfo(
+            @RequestParam(name = "position") String position,
+            @RequestParam(name = "type") String type,
+            @RequestParam(name = "serverFileName")String serverFileName) {
+        docService.addDocInfo(position, type, serverFileName);
+        return null;
     }
 }
