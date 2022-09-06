@@ -37,7 +37,7 @@ public class DocServiceImpl implements DocService {
         String docFileType = type;
         String unit = positionArray[0];
         String pos = positionArray[1];
-        String storagePath = "/doc/" + serverStorageName;
+        String storagePath = "doc/" + serverStorageName;
 
         DocFileInfoDto docFileInfo = new DocFileInfoDto(docFileName, docFileType, unit, pos, storagePath);
         docDao.addDocInfo(docFileInfo);
