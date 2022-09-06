@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
  * @author ：RukiHuang
- * @description：TODO
+ * @description：视频信息实体类
  * @date ：2022/9/1 12:52
  */
 public class VideoFileInfoDto {

@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @author ：RukiHuang
- * @description：TODO
+ * @description：课件service
  * @date ：2022/9/1 13:42
  */
 @Service

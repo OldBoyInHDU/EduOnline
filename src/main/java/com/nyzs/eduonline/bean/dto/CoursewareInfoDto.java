@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
  * @author ：RukiHuang
- * @description：TODO
+ * @description：课件实体类
  * @date ：2022/9/1 13:22
  */
 public class CoursewareInfoDto {

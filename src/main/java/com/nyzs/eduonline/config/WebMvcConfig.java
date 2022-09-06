@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 /**
  * @author ：RukiHuang
- * @description：TODO
+ * @description：文件本地映射设置类
  * @date ：2022/9/6 8:37
  */
 @Configuration
