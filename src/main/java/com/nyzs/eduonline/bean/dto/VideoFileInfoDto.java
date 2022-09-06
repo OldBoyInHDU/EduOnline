@@ -1,5 +1,7 @@
 package com.nyzs.eduonline.bean.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
@@ -13,6 +15,7 @@ public class VideoFileInfoDto {
     private String unit;
     private String position;
     private String storagePath;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date uploadDate;
 
     @Override
@@ -32,7 +35,6 @@ public class VideoFileInfoDto {
         this.unit = unit;
         this.position = position;
         this.storagePath = storagePath;
-        this.uploadDate = new Date();
     }
 
     public int getId() {

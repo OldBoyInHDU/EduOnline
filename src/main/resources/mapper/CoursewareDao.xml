@@ -37,7 +37,7 @@
             courseware_info
         (
             id,
-            courseware_info_name,
+            courseware_name,
             storage_path,
             upload_date
         )

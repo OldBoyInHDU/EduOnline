@@ -32,8 +32,10 @@ public class VideoController {
     @Autowired
     UploadService uploadService;
 
-    @RequestMapping(value = "/videoManage/getVideoInfoByPosOrTitle")
+    @RequestMapping(value = "/videoManage/getVideoInfoByPosOrTitle", method = RequestMethod.GET)
     public ResponseResult getVideoInfoByPosOrTitle(String pos, String title) {
+        System.out.println("pos:" + pos);
+        System.out.println("title:" + title);
         try {
             //pos 传进来是  片叶_开箱
             String position = "";

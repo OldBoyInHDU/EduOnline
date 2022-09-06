@@ -1,5 +1,7 @@
 package com.nyzs.eduonline.bean.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
@@ -11,6 +13,7 @@ public class CoursewareInfoDto {
     private int id;
     private String coursewareName;
     private String storagePath;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date uploadDate;
 
     @Override
@@ -58,6 +61,5 @@ public class CoursewareInfoDto {
     public CoursewareInfoDto(String coursewareName, String storagePath) {
         this.coursewareName = coursewareName;
         this.storagePath = storagePath;
-        this.uploadDate = new Date();
     }
 }

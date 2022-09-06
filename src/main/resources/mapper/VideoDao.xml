@@ -48,8 +48,7 @@
         )
         values (
                    id,
-                   #{docFileName},
-                   #{docFileType},
+                   #{videoFileName},
                    #{unit},
                    #{position},
                    #{storagePath},

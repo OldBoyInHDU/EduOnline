@@ -50,7 +50,7 @@ public class CoursewareController {
         }
     }
 
-    @RequestMapping("/coursewareUpload/coursewareUpload")
+    @RequestMapping("/coursewareUpload/uploadCourseware")
     public ResponseResult uploadVideo(
             @RequestParam("file") MultipartFile file
     ) {
@@ -78,7 +78,7 @@ public class CoursewareController {
 
     }
 
-    @RequestMapping(value = "/deleteCoursewareInfo/deleteCoursewareInfo", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/coursewareManage/deleteCoursewareInfo", method = RequestMethod.DELETE)
     public ResponseResult deleteDocInfo(Integer id) {
         try {
             coursewareService.deleteCoursewareInfo(id);
