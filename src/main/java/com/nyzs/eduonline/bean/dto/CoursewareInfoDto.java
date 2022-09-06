@@ -55,10 +55,9 @@ public class CoursewareInfoDto {
         this.uploadDate = uploadDate;
     }
 
-    public CoursewareInfoDto(int id, String coursewareName, String storagePath, Date uploadDate) {
-        this.id = id;
+    public CoursewareInfoDto(String coursewareName, String storagePath) {
         this.coursewareName = coursewareName;
         this.storagePath = storagePath;
-        this.uploadDate = uploadDate;
+        this.uploadDate = new Date();
     }
 }

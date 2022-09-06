@@ -8,9 +8,7 @@ import com.nyzs.eduonline.service.VideoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -21,7 +19,7 @@ import java.util.List;
  * @description：视频相关 上传和管理
  * @date ：2022/9/1 12:39
  */
-
+@CrossOrigin(origins = "*",maxAge = 3600)
 @RequestMapping("/positionLearning")
 @RestController
 public class VideoController {
@@ -35,14 +33,16 @@ public class VideoController {
     UploadService uploadService;
 
     @RequestMapping(value = "/videoManage/getVideoInfoByPosOrTitle")
-    public ResponseResult getVideoInfoByPosOrTitle(
-            @RequestParam(name = "page", required = true, defaultValue = "1") Integer page,
-            @RequestParam(name = "pageSize", required = true, defaultValue = "10") Integer pageSize,
-            String pos, String title) {
+    public ResponseResult getVideoInfoByPosOrTitle(String pos, String title) {
         try {
-            List<VideoFileInfoDto> videoFileInfoDtoList = videoService.getVideoInfoByPosOrTitle(page, pageSize, pos, title);
-            PageInfo pageInfo = new PageInfo(videoFileInfoDtoList);
-            return ResponseResult.ok(pageInfo, "视频列表查询成功");
+            //pos 传进来是  片叶_开箱
+            String position = "";
+            if(pos != null && pos!= "") {
+                position = pos.split("_")[1];
+            }
+            List<VideoFileInfoDto> videoFileInfoDtoList = videoService.getVideoInfoByPosOrTitle(position, title);
+//            PageInfo pageInfo = new PageInfo(videoFileInfoDtoList);
+            return ResponseResult.ok(videoFileInfoDtoList, "视频列表查询成功");
         } catch (Exception e) {
             logger.error(e.getMessage());
             return ResponseResult.failed(e.getMessage(), "视频列表查询失败");
@@ -60,6 +60,31 @@ public class VideoController {
         } catch (IOException e) {
             logger.error(e.getMessage());
             return ResponseResult.failed(e.getMessage(),"视频上传失败");
+        }
+
+    }
+
+    @RequestMapping(value = "/videoUpload/submitVideoInfo", method = RequestMethod.POST)
+    public ResponseResult submitVideoInfo(
+            @RequestParam(name = "position", required = true, defaultValue = "未指定") String position,
+            @RequestParam(name = "serverFileName") String serverFileName) {
+        try {
+            videoService.addVideoInfo(position, serverFileName);
+            return ResponseResult.ok("提交成功");
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return ResponseResult.failed(e.getMessage(), "提交失败");
+        }
+    }
+
+    @RequestMapping(value = "/videoManage/deleteVideoInfo", method = RequestMethod.DELETE)
+    public ResponseResult deleteVideoInfo(Integer id) {
+        try {
+            videoService.deleteVideoInfo(id);
+            return ResponseResult.ok("删除成功");
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return ResponseResult.failed(e.getMessage(), "删除失败");
         }
 
     }

@@ -21,8 +21,24 @@ public class CoursewareServiceImpl implements CoursewareService {
     CoursewareDao coursewareDao;
 
     @Override
-    public List<CoursewareInfoDto> getCoursewareByPosOrTitle(int page, int pageSize, String pos, String title) throws Exception {
-        PageHelper.startPage(page, pageSize);
+    public List<CoursewareInfoDto> getCoursewareByPosOrTitle(String pos, String title) throws Exception {
+//        PageHelper.startPage(page, pageSize);
         return coursewareDao.getCoursewareByPosOrTitle(pos, title);
+    }
+
+    @Override
+    public void addCoursewareInfo(String serverFileName) throws Exception {
+        String[] nameArray = serverFileName.split(" / ");
+        String coursewareName = nameArray[0];
+        String serverStorageName = nameArray[1];
+        String storagePath = "courseware/" + serverStorageName;
+
+        CoursewareInfoDto coursewareInfoDto = new CoursewareInfoDto(coursewareName, storagePath);
+        coursewareDao.addCoursewareInfo(coursewareInfoDto);
+    }
+
+    @Override
+    public void deleteCoursewareInfo(Integer id) throws Exception {
+        coursewareDao.deleteCoursewareInfo(id);
     }
 }

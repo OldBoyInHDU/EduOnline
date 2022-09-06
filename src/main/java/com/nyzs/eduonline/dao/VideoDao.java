@@ -9,4 +9,8 @@ import java.util.List;
 public interface VideoDao {
 
     List<VideoFileInfoDto> getVideoInfoByPosOrTitle(String pos, String title) throws Exception;
+
+    void addVideoInfo(VideoFileInfoDto videoFileInfoDto) throws Exception;
+
+    void deleteVideoInfo(Integer id) throws Exception;
 }

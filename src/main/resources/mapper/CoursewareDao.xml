@@ -18,7 +18,7 @@
     </resultMap>
 
 
-    <!--    根据岗位、文档类别or文档标题查询-->
+    <!--    根据课件标题查询-->
     <select id="getCoursewareByPosOrTitle" parameterType="String" resultType="com.nyzs.eduonline.bean.dto.CoursewareInfoDto" resultMap="coursewareInfoDtoMap">
         select
         *
@@ -31,6 +31,30 @@
         </where>
 
     </select>
+
+    <insert id="addCoursewareInfo" parameterType="com.nyzs.eduonline.bean.dto.CoursewareInfoDto">
+        insert into
+            courseware_info
+        (
+            id,
+            courseware_info_name,
+            storage_path,
+            upload_date
+        )
+        values (
+                   id,
+                   #{coursewareName},
+                   #{storagePath},
+                   DATE_FORMAT(NOW(), '%Y-%m-%d')
+               )
+    </insert>
+
+    <delete id="deleteCoursewareInfo" parameterType="Integer">
+        delete from
+            courseware_info
+        where
+            id = #{id}
+    </delete>
 
     <!--&lt;!&ndash; id属性填写Dao文件里的函数名称 xxType是参数或是结果的类型根据情况填写 &ndash;&gt;
     &lt;!&ndash; 查询所有   &ndash;&gt;

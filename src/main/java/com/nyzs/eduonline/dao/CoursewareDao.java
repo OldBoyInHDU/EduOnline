@@ -8,4 +8,8 @@ import java.util.List;
 @Mapper
 public interface CoursewareDao {
     List<CoursewareInfoDto> getCoursewareByPosOrTitle(String pos, String title) throws Exception;
+
+    void addCoursewareInfo(CoursewareInfoDto coursewareInfoDto) throws Exception;
+
+    void deleteCoursewareInfo(Integer id) throws Exception;
 }

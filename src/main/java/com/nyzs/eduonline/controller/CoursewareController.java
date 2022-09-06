@@ -8,9 +8,7 @@ import com.nyzs.eduonline.service.UploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -21,7 +19,7 @@ import java.util.List;
  * @description：课件的Controller
  * @date ：2022/9/1 13:37
  */
-
+@CrossOrigin(origins = "*",maxAge = 3600)
 @RequestMapping("/forum")
 @RestController
 public class CoursewareController {
@@ -35,15 +33,17 @@ public class CoursewareController {
     UploadService uploadService;
 
     @RequestMapping(value = "/coursewareManage/getCoursewareByPosOrTitle")
-    public ResponseResult getCoursewareByPosOrTitle(
-            @RequestParam(name = "page", required = true, defaultValue = "1") Integer page,
-            @RequestParam(name = "pageSize", required = true, defaultValue = "10") Integer pageSize,
-            String pos, String title) {
+    public ResponseResult getCoursewareByPosOrTitle(String pos, String title) {
         List<CoursewareInfoDto> coursewareInfoDtoList = null;
         try {
-            coursewareInfoDtoList = coursewareService.getCoursewareByPosOrTitle(page, pageSize, pos, title);
-            PageInfo pageInfo = new PageInfo(coursewareInfoDtoList);
-            return ResponseResult.ok(pageInfo, "课件列表查询成功");
+            //pos 传进来是  片叶_开箱
+            String position = "";
+            if(pos != null && pos!= "") {
+                position = pos.split("_")[1];
+            }
+            coursewareInfoDtoList = coursewareService.getCoursewareByPosOrTitle(position, title);
+//            PageInfo pageInfo = new PageInfo(coursewareInfoDtoList);
+            return ResponseResult.ok(coursewareInfoDtoList, "课件列表查询成功");
         } catch (Exception e) {
             logger.error(e.getMessage());
             return ResponseResult.failed(e.getMessage(), "课件列表查询失败");
@@ -61,6 +61,31 @@ public class CoursewareController {
         } catch (IOException e) {
             logger.error(e.getMessage());
             return ResponseResult.failed(e.getMessage(),"课件上传失败");
+        }
+
+    }
+
+    @RequestMapping(value = "/coursewareUpload/submitCoursewareInfo", method = RequestMethod.POST)
+    public ResponseResult submitCoursewareInfo(
+            @RequestParam(name = "serverFileName")String serverFileName) {
+        try {
+            coursewareService.addCoursewareInfo(serverFileName);
+            return ResponseResult.ok("提交成功");
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return ResponseResult.failed(e.getMessage(), "提交失败");
+        }
+
+    }
+
+    @RequestMapping(value = "/deleteCoursewareInfo/deleteCoursewareInfo", method = RequestMethod.DELETE)
+    public ResponseResult deleteDocInfo(Integer id) {
+        try {
+            coursewareService.deleteCoursewareInfo(id);
+            return ResponseResult.ok("删除成功");
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return ResponseResult.failed(e.getMessage(), "删除失败");
         }
 
     }

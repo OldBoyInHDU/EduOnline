@@ -27,13 +27,12 @@ public class VideoFileInfoDto {
                 '}';
     }
 
-    public VideoFileInfoDto(int id, String videoFileName, String unit, String position, String storagePath, Date uploadDate) {
-        this.id = id;
+    public VideoFileInfoDto(String videoFileName, String unit, String position, String storagePath) {
         this.videoFileName = videoFileName;
         this.unit = unit;
         this.position = position;
         this.storagePath = storagePath;
-        this.uploadDate = uploadDate;
+        this.uploadDate = new Date();
     }
 
     public int getId() {

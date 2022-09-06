@@ -78,15 +78,15 @@ public class DocController {
 //    @CrossOrigin(origins = "*",maxAge = 3600)
     @RequestMapping(value = "/docUpload/submitDocInfo", method = RequestMethod.POST)
     public ResponseResult submitDocInfo(
-            @RequestParam(name = "position") String position,
-            @RequestParam(name = "type") String type,
+            @RequestParam(name = "position", required = true, defaultValue = "未指定") String position,
+            @RequestParam(name = "type", required = true, defaultValue = "未指定") String type,
             @RequestParam(name = "serverFileName")String serverFileName) {
         try {
             docService.addDocInfo(position, type, serverFileName);
             return ResponseResult.ok("提交成功");
         } catch (Exception e) {
             logger.error(e.getMessage());
-            return ResponseResult.failed("提交失败", e.getMessage());
+            return ResponseResult.failed(e.getMessage(), "提交失败");
         }
 
     }
@@ -98,7 +98,7 @@ public class DocController {
             return ResponseResult.ok("删除成功");
         } catch (Exception e) {
             logger.error(e.getMessage());
-            return ResponseResult.failed("删除失败", e.getMessage());
+            return ResponseResult.failed(e.getMessage(), "删除失败");
         }
 
     }

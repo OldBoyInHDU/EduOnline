@@ -18,7 +18,7 @@
     </resultMap>
 
 
-    <!--    根据岗位、文档类别or文档标题查询-->
+    <!--    根据岗位or视频标题查询-->
     <select id="getVideoInfoByPosOrTitle" parameterType="String" resultType="com.nyzs.eduonline.bean.dto.VideoFileInfoDto" resultMap="videoFileInfoDtoMap">
         select
         *
@@ -34,6 +34,35 @@
         </where>
 
     </select>
+
+    <insert id="addVideoInfo" parameterType="com.nyzs.eduonline.bean.dto.VideoFileInfoDto">
+        insert into
+            video_file_info
+        (
+            id,
+            video_file_name,
+            unit,
+            position,
+            storage_path,
+            upload_date
+        )
+        values (
+                   id,
+                   #{docFileName},
+                   #{docFileType},
+                   #{unit},
+                   #{position},
+                   #{storagePath},
+                   DATE_FORMAT(NOW(), '%Y-%m-%d')
+               )
+    </insert>
+
+    <delete id="deleteVideoInfo" parameterType="Integer">
+        delete from
+            video_file_info
+        where
+            id = #{id}
+    </delete>
 
     <!--&lt;!&ndash; id属性填写Dao文件里的函数名称 xxType是参数或是结果的类型根据情况填写 &ndash;&gt;
     &lt;!&ndash; 查询所有   &ndash;&gt;
