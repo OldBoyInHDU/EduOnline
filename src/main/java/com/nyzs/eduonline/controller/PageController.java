@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author ：RukiHuang
  * @description：TODO
@@ -29,10 +31,15 @@ public class PageController {
     @RequestMapping(value = "/getPageInfo", method = RequestMethod.GET)
     public ResponseResult getPageInfo(String pos) {
 //        System.out.println("Pos:" + pos);
-        PageInfoDto pageInfoDto = null;
+        //pos 传进来是  片叶_开箱
+        String position = "";
+        if(pos != null && pos!= "") {
+            position = pos.split("_")[1];
+        }
+        List<PageInfoDto> pageInfoDtoList = null;
         try {
-            pageInfoDto = pageService.getPageInfo(pos);
-            return ResponseResult.ok(pageInfoDto, "页面信息查询成功");
+            pageInfoDtoList = pageService.getPageInfo(position);
+            return ResponseResult.ok(pageInfoDtoList, "页面信息查询成功");
         } catch (Exception e) {
             logger.error(e.getMessage());
             return ResponseResult.failed(e.getMessage(), "页面查询失败");

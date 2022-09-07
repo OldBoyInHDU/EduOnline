@@ -6,6 +6,8 @@ import com.nyzs.eduonline.service.PageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author ：RukiHuang
  * @description：TODO
@@ -18,7 +20,7 @@ public class PageServiceImpl implements PageService {
     PageDao pageDao;
 
     @Override
-    public PageInfoDto getPageInfo(String pos) throws Exception {
+    public List<PageInfoDto> getPageInfo(String pos) throws Exception {
         return pageDao.getPageInfo(pos);
     }
 }
