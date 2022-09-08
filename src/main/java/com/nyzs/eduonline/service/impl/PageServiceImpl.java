@@ -39,18 +39,33 @@ public class PageServiceImpl implements PageService {
     @Override
     public void submitPageInfo(String position, String docServerFileName, String socServerFileName, String vidServerFileName, String posResponsibility) throws Exception {
         String[] positionArray = position.split("_");
-        String[] docNameArray = docServerFileName.split(" / ");
-        String[] socNameArray = socServerFileName.split(" / ");
-        String[] vidNameArray = vidServerFileName.split(" / ");
-
         String unit = positionArray[0];
         String pos = positionArray[1];
-        String docFileName = docNameArray[0];
-        String docStoragePath = "doc/" + docNameArray[1];
-        String socFileName = socNameArray[0];
-        String socStoragePath = "doc/" + socNameArray[1];
-        String videoFileName = vidNameArray[0];
-        String videoStoragePath = "vid/" + vidNameArray[1];
+
+        String docFileName = null;
+        String docStoragePath = null;
+        String socFileName = null;
+        String socStoragePath = null;
+        String videoFileName = null;
+        String videoStoragePath = null;
+
+        if(docServerFileName.length() != 0 && docServerFileName != null){
+            String[] docNameArray = docServerFileName.split(" / ");
+            docFileName = docNameArray[0];
+            docStoragePath = "doc/" + docNameArray[1];
+        }
+
+        if(socServerFileName.length() != 0 && socServerFileName != null){
+            String[] socNameArray = socServerFileName.split(" / ");
+            socFileName = socNameArray[0];
+            socStoragePath = "doc/" + socNameArray[1];
+        }
+
+        if(socServerFileName.length() != 0 && vidServerFileName != null){
+            String[] vidNameArray = vidServerFileName.split(" / ");
+            videoFileName = vidNameArray[0];
+            videoStoragePath = "vid/" + vidNameArray[1];
+        }
 
         PageInfoDto pageInfoDto = new PageInfoDto(unit, pos, posResponsibility, docFileName, docStoragePath, socFileName, socStoragePath, videoFileName, videoStoragePath);
 //        DocFileInfoDto docFileInfoDto = new DocFileInfoDto(docFileName, unit, pos, docStoragePath);

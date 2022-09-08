@@ -45,7 +45,7 @@ public class DocController {
         try {
             //pos 传进来是  片叶_开箱
             String position = "";
-            if(pos != null && pos!= "") {
+            if(pos != null && pos.length() != 0) {
                 position = pos.split("_")[1];
             }
             List<DocFileInfoDto> fileInfoListDto = docService.getDocByPosOrTitle(position, type, title);

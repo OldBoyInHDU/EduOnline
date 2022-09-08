@@ -53,6 +53,11 @@ public class PageController {
             String posResponsibility
     ) {
         try {
+            System.out.println("position:" + position);
+            System.out.println("docServerFileName:" + docServerFileName);
+            System.out.println("socServerFileName:" + socServerFileName);
+            System.out.println("vidServerFileName:" + vidServerFileName);
+            System.out.println("posResponsibility:" + posResponsibility);
             pageService.submitPageInfo(position, docServerFileName, socServerFileName, vidServerFileName, posResponsibility);
             return ResponseResult.ok("提交成功");
         } catch (Exception e) {
