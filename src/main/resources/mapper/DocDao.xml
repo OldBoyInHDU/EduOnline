@@ -10,7 +10,6 @@
     <resultMap type="com.nyzs.eduonline.bean.dto.DocFileInfoDto" id="docFileInfoDtoMap">
         <id column="id" property="id"/>
         <result column="doc_file_name" property="docFileName"/>
-        <result column="doc_file_type" property="docFileType"/>
         <result column="unit" property="unit"/>
         <result column="position" property="position"/>
         <result column="storage_path" property="storagePath"/>
@@ -20,7 +19,7 @@
 
 
     <!--    根据岗位、文档类别or文档标题查询-->
-    <select id="getDocByPosOrTypeOrTitle" parameterType="String" resultType="com.nyzs.eduonline.bean.dto.DocFileInfoDto" resultMap="docFileInfoDtoMap">
+    <select id="getDocByPosOrTitle" parameterType="String" resultType="com.nyzs.eduonline.bean.dto.DocFileInfoDto" resultMap="docFileInfoDtoMap">
         select
         *
         from
@@ -28,9 +27,6 @@
         <where>
             <if test="pos!=null and pos!='' ">
                 dfi.position LIKE CONCAT(CONCAT('%', #{pos}),'%')
-            </if>
-            <if test="type!= null and type!= '' ">
-                AND dfi.doc_file_type = #{type}
             </if>
             <if test="title!= null and title!= '' ">
                 AND dfi.doc_file_name LIKE CONCAT(CONCAT('%', #{title}),'%')
@@ -43,20 +39,18 @@
         insert into
             doc_file_info
             (
-             id,
-             doc_file_name,
-             doc_file_type,
-             unit,
-             position,
-             storage_path,
-             upload_date
+                id,
+                unit,
+                position,
+                doc_file_name,
+                storage_path,
+                upload_date
             )
         values (
                 id,
-                #{docFileName},
-                #{docFileType},
                 #{unit},
                 #{position},
+                #{docFileName},
                 #{storagePath},
                 DATE_FORMAT(NOW(), '%Y-%m-%d')
                )

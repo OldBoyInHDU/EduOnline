@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface DocDao {
-    List<DocFileInfoDto> getDocByPosOrTypeOrTitle(String pos, String type, String title) throws Exception;
+    List<DocFileInfoDto> getDocByPosOrTitle(String pos, String title) throws Exception;
 
     void addDocInfo(DocFileInfoDto docFileInfo) throws Exception;
 

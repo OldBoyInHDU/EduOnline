@@ -21,11 +21,11 @@ public class DocServiceImpl implements DocService {
     DocDao docDao;
 
     @Override
-    public List<DocFileInfoDto> getDocByPosOrTypeOrTitle(String pos, String type, String title) throws Exception {
+    public List<DocFileInfoDto> getDocByPosOrTitle(String pos, String type, String title) throws Exception {
 //        System.out.println("page:" + page + "---" + "size:" + pageSize);
 
 //        PageHelper.startPage(page, pageSize);
-        return docDao.getDocByPosOrTypeOrTitle(pos, type, title);
+        return docDao.getDocByPosOrTitle(pos, title);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class DocServiceImpl implements DocService {
         String pos = positionArray[1];
         String storagePath = "doc/" + serverStorageName;
 
-        DocFileInfoDto docFileInfo = new DocFileInfoDto(docFileName, docFileType, unit, pos, storagePath);
+        DocFileInfoDto docFileInfo = new DocFileInfoDto(docFileName, unit, pos, storagePath);
         docDao.addDocInfo(docFileInfo);
     }
 

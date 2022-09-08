@@ -12,7 +12,7 @@ import java.util.Date;
 public class DocFileInfoDto {
     private int id;
     private String docFileName;
-    private String docFileType;
+//    private String docFileType;
     private String unit;
     private String position;
     private String storagePath;
@@ -24,7 +24,7 @@ public class DocFileInfoDto {
         return "DocFileInfoDto{" +
                 "id=" + id +
                 ", docFileName='" + docFileName + '\'' +
-                ", docFileType='" + docFileType + '\'' +
+//                ", docFileType='" + docFileType + '\'' +
                 ", unit='" + unit + '\'' +
                 ", position='" + position + '\'' +
                 ", storagePath='" + storagePath + '\'' +
@@ -32,9 +32,9 @@ public class DocFileInfoDto {
                 '}';
     }
 
-    public DocFileInfoDto(String docFileName, String docFileType, String unit, String position, String storagePath) {
+    public DocFileInfoDto(String docFileName, String unit, String position, String storagePath) {
         this.docFileName = docFileName;
-        this.docFileType = docFileType;
+//        this.docFileType = docFileType;
         this.unit = unit;
         this.position = position;
         this.storagePath = storagePath;
@@ -56,13 +56,13 @@ public class DocFileInfoDto {
         this.docFileName = docFileName;
     }
 
-    public String getDocFileType() {
-        return docFileType;
-    }
-
-    public void setDocFileType(String docFileType) {
-        this.docFileType = docFileType;
-    }
+//    public String getDocFileType() {
+//        return docFileType;
+//    }
+//
+//    public void setDocFileType(String docFileType) {
+//        this.docFileType = docFileType;
+//    }
 
     public String getUnit() {
         return unit;

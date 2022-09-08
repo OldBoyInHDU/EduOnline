@@ -39,8 +39,8 @@ public class DocController {
      * @param title
      * @return
      */
-    @RequestMapping(value = "/docManage/getDocByPosOrTypeOrTitle", method = RequestMethod.GET)
-    public ResponseResult getDocByPosOrTypeOrTitle(String pos, String type, String title) {
+    @RequestMapping(value = "/docManage/getDocByPosOrTitle", method = RequestMethod.GET)
+    public ResponseResult getDocByPosOrTitle(String pos, String type, String title) {
 
         try {
             //pos 传进来是  片叶_开箱
@@ -48,7 +48,7 @@ public class DocController {
             if(pos != null && pos!= "") {
                 position = pos.split("_")[1];
             }
-            List<DocFileInfoDto> fileInfoListDto = docService.getDocByPosOrTypeOrTitle(position, type, title);
+            List<DocFileInfoDto> fileInfoListDto = docService.getDocByPosOrTitle(position, type, title);
 //            System.out.println(fileInfoListDto);
 //            PageInfo pageInfo = new PageInfo(fileInfoListDto);
             return ResponseResult.ok(fileInfoListDto, "获取文档列表成功");
