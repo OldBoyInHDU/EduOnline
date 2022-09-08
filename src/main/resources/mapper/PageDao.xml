@@ -12,9 +12,12 @@
         <result column="unit" property="unit"/>
         <result column="position" property="position"/>
         <result column="pos_responsibility" property="posResponsibility"/>
-        <result column="work_manual_addr" property="workManualAddr"/>
-        <result column="soc_manual_addr" property="socManualAddr"/>
-        <result column="toturial_video_addr" property="toturialVideoAddr"/>
+        <result column="doc_file_name" property="docFileName"/>
+        <result column="doc_storage_path" property="docStoragePath"/>
+        <result column="soc_file_name" property="socFileName"/>
+        <result column="soc_storage_path" property="socStoragePath"/>
+        <result column="video_file_name" property="videoFileName"/>
+        <result column="video_storage_path" property="videoStoragePath"/>
         <result column="last_update_date" property="lastUpdateDate"/>
 
     </resultMap>
@@ -33,6 +36,66 @@
         </where>
 
     </select>
+
+    <update id="updatePageInfo" parameterType="com.nyzs.eduonline.bean.dto.PageInfoDto">
+        update
+            page_info pi
+        <trim prefix="set" suffixOverrides=",">
+            <if test="posResponsibility != null and posResponsibility!=''">
+                pi.pos_responsibility=#{posResponsibility},</if>
+            <if test="docFileName != null and docFileName!=''">
+                pi.doc_file_name=#{docFileName},</if>
+            <if test="docStoragePath != null and docStoragePath!=''">
+                pi.doc_storage_path=#{docStoragePath},</if>
+            <if test="socFileName != null and socFileName!=''">
+                pi.soc_file_name=#{socFileName},</if>
+            <if test="socStoragePath != null and socStoragePath!=''">
+                pi.soc_storage_path=#{socStoragePath},</if>
+            <if test="videoFileName != null and videoFileName!=''">
+                pi.video_file_name=#{videoFileName},</if>
+            <if test="videoStoragePath != null and videoStoragePath!=''">
+                pi.video_storage_path=#{videoStoragePath},</if>
+            pi.last_update_date = DATE_FORMAT(NOW(), '%Y-%m-%d')
+
+
+        </trim>
+
+        where
+            pi.position = #{position}
+
+
+    </update>
+
+    <insert id="addPageInfo" parameterType="com.nyzs.eduonline.bean.dto.PageInfoDto">
+        insert into
+            page_info
+        (
+            id,
+            unit,
+            position,
+            pos_responsibility,
+            doc_file_name,
+            doc_storage_path,
+            soc_file_name,
+            soc_storage_path,
+            video_file_name,
+            video_storage_path,
+            last_update_date
+        )
+        values (
+                   id,
+                   #{unit},
+                   #{position},
+                   #{posResponsibility},
+                   #{docFileName},
+                   #{docStoragePath},
+                   #{socFileName},
+                   #{socStoragePath},
+                   #{videoFileName},
+                   #{videoStoragePath},
+                   DATE_FORMAT(NOW(), '%Y-%m-%d')
+               )
+    </insert>
 
 
 

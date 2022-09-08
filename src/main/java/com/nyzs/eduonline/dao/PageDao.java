@@ -9,4 +9,8 @@ import java.util.List;
 public interface PageDao {
 
     List<PageInfoDto> getPageInfo(String pos) throws Exception;
+
+    void addPageInfo(PageInfoDto pageInfoDto) throws Exception;
+
+    void updatePageInfo(PageInfoDto pageInfoDto) throws Exception;
 }

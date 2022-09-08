@@ -13,21 +13,16 @@ public class PageInfoDto {
     private int id;
     private String unit;
     private String position;
+
     private String posResponsibility;
-    private String workManualAddr;
-    private String socManualAddr;
-    private String toturialVideoAddr;
+    private String docFileName;
+    private String docStoragePath;
+    private String socFileName;
+    private String socStoragePath;
+    private String videoFileName;
+    private String videoStoragePath;
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date lastUpdateDate;
-
-    public PageInfoDto(String unit, String position, String posResponsibility, String workManualAddr, String socManualAddr, String toturialVideoAddr) {
-        this.unit = unit;
-        this.position = position;
-        this.posResponsibility = posResponsibility;
-        this.workManualAddr = workManualAddr;
-        this.socManualAddr = socManualAddr;
-        this.toturialVideoAddr = toturialVideoAddr;
-    }
 
     @Override
     public String toString() {
@@ -36,11 +31,26 @@ public class PageInfoDto {
                 ", unit='" + unit + '\'' +
                 ", position='" + position + '\'' +
                 ", posResponsibility='" + posResponsibility + '\'' +
-                ", workManualAddr='" + workManualAddr + '\'' +
-                ", socManualAddr='" + socManualAddr + '\'' +
-                ", toturialVideoAddr='" + toturialVideoAddr + '\'' +
+                ", docFileName='" + docFileName + '\'' +
+                ", docStoragePath='" + docStoragePath + '\'' +
+                ", socFileName='" + socFileName + '\'' +
+                ", socStoragePath='" + socStoragePath + '\'' +
+                ", videoFileName='" + videoFileName + '\'' +
+                ", videoStoragePath='" + videoStoragePath + '\'' +
                 ", lastUpdateDate=" + lastUpdateDate +
                 '}';
+    }
+
+    public PageInfoDto(String unit, String position, String posResponsibility, String docFileName, String docStoragePath, String socFileName, String socStoragePath, String videoFileName, String videoStoragePath) {
+        this.unit = unit;
+        this.position = position;
+        this.posResponsibility = posResponsibility;
+        this.docFileName = docFileName;
+        this.docStoragePath = docStoragePath;
+        this.socFileName = socFileName;
+        this.socStoragePath = socStoragePath;
+        this.videoFileName = videoFileName;
+        this.videoStoragePath = videoStoragePath;
     }
 
     public int getId() {
@@ -75,28 +85,52 @@ public class PageInfoDto {
         this.posResponsibility = posResponsibility;
     }
 
-    public String getWorkManualAddr() {
-        return workManualAddr;
+    public String getDocFileName() {
+        return docFileName;
     }
 
-    public void setWorkManualAddr(String workManualAddr) {
-        this.workManualAddr = workManualAddr;
+    public void setDocFileName(String docFileName) {
+        this.docFileName = docFileName;
     }
 
-    public String getSocManualAddr() {
-        return socManualAddr;
+    public String getDocStoragePath() {
+        return docStoragePath;
     }
 
-    public void setSocManualAddr(String socManualAddr) {
-        this.socManualAddr = socManualAddr;
+    public void setDocStoragePath(String docStoragePath) {
+        this.docStoragePath = docStoragePath;
     }
 
-    public String getToturialVideoAddr() {
-        return toturialVideoAddr;
+    public String getSocFileName() {
+        return socFileName;
     }
 
-    public void setToturialVideoAddr(String toturialVideoAddr) {
-        this.toturialVideoAddr = toturialVideoAddr;
+    public void setSocFileName(String socFileName) {
+        this.socFileName = socFileName;
+    }
+
+    public String getSocStoragePath() {
+        return socStoragePath;
+    }
+
+    public void setSocStoragePath(String socStoragePath) {
+        this.socStoragePath = socStoragePath;
+    }
+
+    public String getVideoFileName() {
+        return videoFileName;
+    }
+
+    public void setVideoFileName(String videoFileName) {
+        this.videoFileName = videoFileName;
+    }
+
+    public String getVideoStoragePath() {
+        return videoStoragePath;
+    }
+
+    public void setVideoStoragePath(String videoStoragePath) {
+        this.videoStoragePath = videoStoragePath;
     }
 
     public Date getLastUpdateDate() {
