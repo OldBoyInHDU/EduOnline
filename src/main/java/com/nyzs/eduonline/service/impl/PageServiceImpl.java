@@ -64,7 +64,7 @@ public class PageServiceImpl implements PageService {
         if(socServerFileName.length() != 0 && vidServerFileName != null){
             String[] vidNameArray = vidServerFileName.split(" / ");
             videoFileName = vidNameArray[0];
-            videoStoragePath = "vid/" + vidNameArray[1];
+            videoStoragePath = "video/" + vidNameArray[1];
         }
 
         PageInfoDto pageInfoDto = new PageInfoDto(unit, pos, posResponsibility, docFileName, docStoragePath, socFileName, socStoragePath, videoFileName, videoStoragePath);

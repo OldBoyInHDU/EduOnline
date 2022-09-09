@@ -17,19 +17,33 @@
 
     </resultMap>
 
+    <resultMap type="com.nyzs.eduonline.bean.dto.DocFileInfoDto" id="docFileInfoDtoMap1">
+        <id column="id" property="id"/>
+        <result column="doc_file_name" property="docFileName"/>
+        <result column="unit" property="unit"/>
+        <result column="position" property="position"/>
+        <result column="doc_storage_path" property="storagePath"/>
+        <result column="last_update_date" property="uploadDate"/>
+    </resultMap>
+
 
     <!--    根据岗位、文档类别or文档标题查询-->
-    <select id="getDocByPosOrTitle" parameterType="String" resultType="com.nyzs.eduonline.bean.dto.DocFileInfoDto" resultMap="docFileInfoDtoMap">
+    <select id="getDocByPosOrTitle" parameterType="String" resultType="com.nyzs.eduonline.bean.dto.DocFileInfoDto" resultMap="docFileInfoDtoMap1">
         select
-        *
+            id,
+            unit,
+            position,
+            doc_file_name,
+            doc_storage_path,
+            last_update_date
         from
-        doc_file_info dfi
+        page_info pi
         <where>
             <if test="pos!=null and pos!='' ">
-                dfi.position LIKE CONCAT(CONCAT('%', #{pos}),'%')
+                pi.position LIKE CONCAT(CONCAT('%', #{pos}),'%')
             </if>
             <if test="title!= null and title!= '' ">
-                AND dfi.doc_file_name LIKE CONCAT(CONCAT('%', #{title}),'%')
+                AND pi.doc_file_name LIKE CONCAT(CONCAT('%', #{title}),'%')
             </if>
         </where>
 
