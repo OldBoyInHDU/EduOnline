@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 这里填写对应的Dao文件所在的路径 -->
+<mapper namespace="com.nyzs.eduonline.dao.PositionDao"    >
+    <!-- 填写数据库里对应的表的表名 -->
+    <!-- 这里是作为一个变量使用 -->
+    <sql id="table">position_list</sql>
+
+    <resultMap type="com.nyzs.eduonline.bean.dto.PositionInfoDto" id="positionInfoDtoMap">
+        <result column="unit" property="unit"/>
+        <result column="value" property="value"/>
+        <result column="label" property="label"/>
+
+    </resultMap>
+
+    <!--   查询岗位列表-->
+    <select id="getPositionList" parameterType="String" resultType="com.nyzs.eduonline.bean.dto.PositionInfoDto" resultMap="positionInfoDtoMap">
+        select
+            pl.unit,
+            pl.value,
+            pl.label
+        from
+            position_list pl
+        <where>
+            <if test="unit!=null and unit!='' ">
+                pl.unit LIKE CONCAT(CONCAT('%', #{unit}),'%')
+            </if>
+        </where>
+    </select>
+
+</mapper>
