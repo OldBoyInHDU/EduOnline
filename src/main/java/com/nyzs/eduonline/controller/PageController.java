@@ -28,7 +28,7 @@ public class PageController {
     @RequestMapping(value = "/getPageInfo", method = RequestMethod.GET)
     public ResponseResult getPageInfo(String pos) {
 //        System.out.println("Pos:" + pos);
-        //pos 传进来是  片叶_开箱
+        //pos 传进来是  unitPos 片叶_开箱
         String position = "";
         if(pos != null && pos!= "") {
             position = pos.split("_")[1];
