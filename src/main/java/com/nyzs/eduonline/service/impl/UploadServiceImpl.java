@@ -51,7 +51,7 @@ public class UploadServiceImpl implements UploadService {
     public String uploadCourseware(MultipartFile file) throws IOException {
         System.out.println(file.getContentType());
         if(!uploadProperties.getAllowType().get(0).equals(file.getContentType())) {
-            throw new IOException("视频上传类型错误");
+            throw new IOException("课件上传类型错误");
         }
         String fileName = UploadUtils.generateFileName(file.getOriginalFilename());
         File newFile = new File(uploadProperties.getPath()+"\\courseware\\" + fileName);
