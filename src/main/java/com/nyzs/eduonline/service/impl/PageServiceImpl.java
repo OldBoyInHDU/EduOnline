@@ -32,7 +32,7 @@ public class PageServiceImpl implements PageService {
     @Override
     public List<PageInfoDto> getPageInfo(String pos) throws Exception {
         List<PageInfoDto> list = pageDao.getPageInfo(pos);
-//        System.out.println(list);
+        System.out.println(list);
         return list;
     }
 
@@ -61,7 +61,7 @@ public class PageServiceImpl implements PageService {
             socStoragePath = "doc/" + socNameArray[1];
         }
 
-        if(vidServerFileName.length() != 0 && vidServerFileName != null){
+        if(socServerFileName.length() != 0 && vidServerFileName != null){
             String[] vidNameArray = vidServerFileName.split(" / ");
             videoFileName = vidNameArray[0];
             videoStoragePath = "video/" + vidNameArray[1];
