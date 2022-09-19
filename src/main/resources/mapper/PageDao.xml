@@ -26,7 +26,17 @@
     <!--    根据岗位查询-->
     <select id="getPageInfo" parameterType="String" resultType="com.nyzs.eduonline.bean.dto.PageInfoDto" resultMap="PageInfoDtoMap">
         select
-        *
+        id
+        ,unit
+        ,position
+        ,pos_responsibility
+        ,doc_file_name
+        ,doc_storage_path
+        ,soc_file_name
+        ,soc_storage_path
+        ,video_file_name
+        ,video_storage_path
+        ,last_update_date
         from
         page_info pi
         <where>
@@ -86,13 +96,13 @@
                    id,
                    #{unit},
                    #{position},
-                   #{posResponsibility},
-                   #{docFileName},
-                   #{docStoragePath},
-                   #{socFileName},
-                   #{socStoragePath},
-                   #{videoFileName},
-                   #{videoStoragePath},
+                   ifnull(#{posResponsibility}, "待补充"),
+                   ifnull(#{docFileName}, "待补充"),
+                   ifnull(#{docStoragePath}, "待补充"),
+                   ifnull(#{socFileName}, "待补充"),
+                   ifnull(#{socStoragePath}, "待补充"),
+                   ifnull(#{videoFileName}, "待补充"),
+                   ifnull(#{videoStoragePath}, "待补充"),
                    DATE_FORMAT(NOW(), '%Y-%m-%d')
                )
     </insert>
