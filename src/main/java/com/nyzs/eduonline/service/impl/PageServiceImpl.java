@@ -49,19 +49,19 @@ public class PageServiceImpl implements PageService {
         String videoFileName = null;
         String videoStoragePath = null;
 
-        if(docServerFileName.length() != 0 && docServerFileName != null){
+        if(docServerFileName != null && docServerFileName.length() != 0){
             String[] docNameArray = docServerFileName.split(" / ");
             docFileName = docNameArray[0];
             docStoragePath = "doc/" + docNameArray[1];
         }
 
-        if(socServerFileName.length() != 0 && socServerFileName != null){
+        if(socServerFileName != null && socServerFileName.length() != 0){
             String[] socNameArray = socServerFileName.split(" / ");
             socFileName = socNameArray[0];
             socStoragePath = "doc/" + socNameArray[1];
         }
 
-        if(socServerFileName.length() != 0 && vidServerFileName != null){
+        if(vidServerFileName != null && vidServerFileName.length() != 0){
             String[] vidNameArray = vidServerFileName.split(" / ");
             videoFileName = vidNameArray[0];
             videoStoragePath = "video/" + vidNameArray[1];
