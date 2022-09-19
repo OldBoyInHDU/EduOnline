@@ -44,7 +44,7 @@ public class VideoController {
 //            PageInfo pageInfo = new PageInfo(videoFileInfoDtoList);
             return ResponseResult.ok(videoFileInfoDtoList, "视频列表查询成功");
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error("程序错误", e);
             return ResponseResult.failed(e.getMessage(), "视频列表查询失败");
         }
     }
@@ -58,7 +58,7 @@ public class VideoController {
             filename = uploadService.uploadVideo(file);
             return ResponseResult.ok(filename, "视频上传成功");
         } catch (IOException e) {
-            logger.error(e.getMessage());
+            logger.error("程序错误", e);
             return ResponseResult.failed(e.getMessage(),"视频上传失败");
         }
 
@@ -72,7 +72,7 @@ public class VideoController {
             videoService.addVideoInfo(position, serverFileName);
             return ResponseResult.ok("提交成功");
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error("程序错误", e);
             return ResponseResult.failed(e.getMessage(), "提交失败");
         }
     }
@@ -83,7 +83,7 @@ public class VideoController {
             videoService.deleteVideoInfo(id);
             return ResponseResult.ok("删除成功");
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error("程序错误", e);
             return ResponseResult.failed(e.getMessage(), "删除失败");
         }
 

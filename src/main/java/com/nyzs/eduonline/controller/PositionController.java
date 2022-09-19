@@ -37,7 +37,7 @@ public class PositionController {
             return ResponseResult.ok(positionInfoDtoMap, "岗位查询成功");
         } catch (Exception e) {
             e.printStackTrace();
-            logger.info(e.getMessage());
+            logger.info("程序错误", e);
             return ResponseResult.failed(e.getMessage());
         }
 

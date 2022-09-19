@@ -45,7 +45,7 @@ public class CoursewareController {
 //            PageInfo pageInfo = new PageInfo(coursewareInfoDtoList);
             return ResponseResult.ok(coursewareInfoDtoList, "课件列表查询成功");
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error("程序错误", e);
             return ResponseResult.failed(e.getMessage(), "课件列表查询失败");
         }
     }
@@ -59,7 +59,7 @@ public class CoursewareController {
             filename = uploadService.uploadCourseware(file);
             return ResponseResult.ok(filename, "课件上传成功");
         } catch (IOException e) {
-            logger.error(e.getMessage());
+            logger.error("程序错误", e);
             return ResponseResult.failed(e.getMessage(),"课件上传失败");
         }
 
@@ -72,7 +72,7 @@ public class CoursewareController {
             coursewareService.addCoursewareInfo(serverFileName);
             return ResponseResult.ok("提交成功");
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error("程序错误", e);
             return ResponseResult.failed(e.getMessage(), "提交失败");
         }
 
@@ -84,7 +84,7 @@ public class CoursewareController {
             coursewareService.deleteCoursewareInfo(id);
             return ResponseResult.ok("删除成功");
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error("程序错误", e);
             return ResponseResult.failed(e.getMessage(), "删除失败");
         }
 
