@@ -38,7 +38,7 @@ public class PageController {
             pageInfoDtoList = pageService.getPageInfo(position);
             return ResponseResult.ok(pageInfoDtoList, "页面信息查询成功");
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error("程序错误", e);
             return ResponseResult.failed(e.getMessage(), "页面查询失败");
         }
 
@@ -61,7 +61,8 @@ public class PageController {
             pageService.submitPageInfo(position, docServerFileName, socServerFileName, vidServerFileName, posResponsibility);
             return ResponseResult.ok("提交成功");
         } catch (Exception e) {
-            logger.error(e.getMessage());
+//            e.printStackTrace();
+            logger.error("程序错误", e);
             return ResponseResult.failed(e.getMessage(), "提交失败");
         }
 

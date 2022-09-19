@@ -23,30 +23,30 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <!--        1-->
             <!-- 不依赖内嵌tomcat -->
-<!--            <exclusions>
+            <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-tomcat</artifactId>
                 </exclusion>
-            </exclusions>-->
+            </exclusions>
         </dependency>
         <!--       2-->
         <!-- 排除springboot内置tomcat容器的SpringBootServletInitializer接口需要依赖 javax.servlet -->
 
-<!--        <dependency>
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>4.0.1</version>
             <scope>provided</scope>
-        </dependency>-->
+        </dependency>
         <!--       3-->
         <!-- 本地调试集成tomcat -->
-<!--        <dependency>
+        <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-servlet-api</artifactId>
             <version>8.0.36</version>
             <scope>provided</scope>
-        </dependency>-->
+        </dependency>
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>

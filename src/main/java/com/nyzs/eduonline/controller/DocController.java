@@ -53,8 +53,8 @@ public class DocController {
 //            PageInfo pageInfo = new PageInfo(fileInfoListDto);
             return ResponseResult.ok(fileInfoListDto, "获取文档列表成功");
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            System.out.println(e.getCause());
+//            e.printStackTrace();
+            logger.error("程序错误", e);
             return ResponseResult.failed(e.getMessage(), "获取文档列表失败");
         }
     }
@@ -69,7 +69,8 @@ public class DocController {
             filename = uploadService.uploadDoc(file);
             return ResponseResult.ok(filename, "文档上传成功");
         } catch (IOException e) {
-            logger.error(e.getMessage());
+//            e.printStackTrace();
+            logger.error("程序错误", e);
             return ResponseResult.failed(e.getMessage(),"文档上传失败");
         }
 
@@ -85,7 +86,8 @@ public class DocController {
             docService.addDocInfo(position, type, serverFileName);
             return ResponseResult.ok("提交成功");
         } catch (Exception e) {
-            logger.error(e.getMessage());
+//            e.printStackTrace();
+            logger.error("程序错误", e);
             return ResponseResult.failed(e.getMessage(), "提交失败");
         }
 
@@ -97,7 +99,8 @@ public class DocController {
             docService.deleteDocInfo(id);
             return ResponseResult.ok("删除成功");
         } catch (Exception e) {
-            logger.error(e.getMessage());
+//            e.printStackTrace();
+            logger.error("程序错误", e);
             return ResponseResult.failed(e.getMessage(), "删除失败");
         }
 
