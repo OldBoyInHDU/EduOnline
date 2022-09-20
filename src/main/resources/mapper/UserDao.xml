@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 这里填写对应的Dao文件所在的路径 -->
+<mapper namespace="com.nyzs.eduonline.dao.UserDao"    >
+    <!-- 填写数据库里对应的表的表名 -->
+    <!-- 这里是作为一个变量使用 -->
+    <sql id="table">user_info</sql>
+
+    <resultMap type="com.nyzs.eduonline.bean.dto.User" id="userMap">
+        <id column="id" property="id" />
+        <result column="account" property="account"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+
+    </resultMap>
+
+
+    <!--    根据岗位、文档类别or文档标题查询-->
+    <select id="getByAccount" parameterType="String" resultType="com.nyzs.eduonline.bean.dto.User" resultMap="userMap">
+        select
+            *
+        from
+            user_info
+        where
+            account = #{account}
+    </select>
+
+</mapper>
