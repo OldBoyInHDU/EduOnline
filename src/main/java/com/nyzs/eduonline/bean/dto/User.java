@@ -2,7 +2,7 @@ package com.nyzs.eduonline.bean.dto;
 
 /**
  * @author ：RukiHuang
- * @description：TODO
+ * @description：User
  * @date ：2022/9/20 8:20
  */
 public class User {
