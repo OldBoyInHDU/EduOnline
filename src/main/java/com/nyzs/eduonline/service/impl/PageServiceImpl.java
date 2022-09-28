@@ -58,7 +58,7 @@ public class PageServiceImpl implements PageService {
         if(socServerFileName != null && socServerFileName.length() != 0){
             String[] socNameArray = socServerFileName.split(" / ");
             socFileName = socNameArray[0];
-            socStoragePath = "doc/" + socNameArray[1];
+            socStoragePath = "soc/" + socNameArray[1];
         }
 
         if(vidServerFileName != null && vidServerFileName.length() != 0){

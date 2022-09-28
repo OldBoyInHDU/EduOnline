@@ -35,6 +35,19 @@ public class UploadServiceImpl implements UploadService {
     }
 
     @Override
+    public String uploadSoc(MultipartFile file) throws IOException {
+        System.out.println(file.getContentType());
+        if(!uploadProperties.getAllowType().get(0).equals(file.getContentType())) {
+            throw new IOException("文档上传类型错误");
+        }
+        String fileName = UploadUtils.generateFileName(file.getOriginalFilename());
+        File newFile = new File(uploadProperties.getPath()+"\\soc\\" + fileName);
+        file.transferTo(newFile);
+        System.out.println(newFile.getPath());
+        return fileName;
+    }
+
+    @Override
     public String uploadVideo(MultipartFile file) throws IOException {
         System.out.println(file.getContentType());
         if(!uploadProperties.getAllowType().get(1).equals(file.getContentType())) {
