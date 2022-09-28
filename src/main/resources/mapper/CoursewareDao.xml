@@ -29,6 +29,7 @@
                 ci.courseware_name LIKE CONCAT(CONCAT('%', #{title}),'%')
             </if>
         </where>
+        order by upload_date desc
 
     </select>
 

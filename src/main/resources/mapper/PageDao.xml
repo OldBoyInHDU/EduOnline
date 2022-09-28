@@ -44,6 +44,7 @@
                 pi.position LIKE CONCAT(CONCAT('%', #{pos}),'%')
             </if>
         </where>
+        order by last_update_date desc
 
     </select>
 

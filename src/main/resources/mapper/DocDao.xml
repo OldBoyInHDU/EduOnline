@@ -46,6 +46,7 @@
                 AND pi.doc_file_name LIKE CONCAT(CONCAT('%', #{title}),'%')
             </if>
         </where>
+        order by last_update_date desc
 
     </select>
 
