@@ -28,7 +28,10 @@ public class UploadServiceImpl implements UploadService {
             throw new IOException("文档上传类型错误");
         }
         String fileName = UploadUtils.generateFileName(file.getOriginalFilename());
-        File newFile = new File(uploadProperties.getPath()+"\\doc\\" + fileName);
+        File newFile = new File(uploadProperties.getPath()+"/doc/" + fileName);
+        newFile.setWritable(true);//设置执行权限
+        newFile.setReadable(true);//设置读权限
+        newFile.setExecutable(true);//设施写权限
         file.transferTo(newFile);
         System.out.println(newFile.getPath());
         return fileName;
@@ -41,7 +44,10 @@ public class UploadServiceImpl implements UploadService {
             throw new IOException("文档上传类型错误");
         }
         String fileName = UploadUtils.generateFileName(file.getOriginalFilename());
-        File newFile = new File(uploadProperties.getPath()+"\\soc\\" + fileName);
+        File newFile = new File(uploadProperties.getPath()+"/soc/" + fileName);
+        newFile.setWritable(true);//设置执行权限
+        newFile.setReadable(true);//设置读权限
+        newFile.setExecutable(true);//设施写权限
         file.transferTo(newFile);
         System.out.println(newFile.getPath());
         return fileName;
@@ -54,7 +60,11 @@ public class UploadServiceImpl implements UploadService {
             throw new IOException("视频上传类型错误");
         }
         String fileName = UploadUtils.generateFileName(file.getOriginalFilename());
-        File newFile = new File(uploadProperties.getPath()+"\\video\\" + fileName);
+        File newFile = new File(uploadProperties.getPath()+"/video/" + fileName);
+        newFile.setWritable(true);//设置执行权限
+        newFile.setReadable(true);//设置读权限
+        newFile.setExecutable(true);//设施写权限
+
         file.transferTo(newFile);
         System.out.println(newFile.getPath());
         return fileName;
@@ -67,7 +77,10 @@ public class UploadServiceImpl implements UploadService {
             throw new IOException("课件上传类型错误");
         }
         String fileName = UploadUtils.generateFileName(file.getOriginalFilename());
-        File newFile = new File(uploadProperties.getPath()+"\\courseware\\" + fileName);
+        File newFile = new File(uploadProperties.getPath()+"/courseware/" + fileName);
+        newFile.setWritable(true);//设置执行权限
+        newFile.setReadable(true);//设置读权限
+        newFile.setExecutable(true);//设施写权限
         file.transferTo(newFile);
         System.out.println(newFile.getPath());
         return fileName;

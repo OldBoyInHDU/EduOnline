@@ -2,6 +2,7 @@ package com.nyzs.eduonline.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.nyzs.eduonline.bean.dto.DocFileInfoDto;
+import com.nyzs.eduonline.bean.dto.File;
 import com.nyzs.eduonline.dao.DocDao;
 import com.nyzs.eduonline.service.DocService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,18 +30,17 @@ public class DocServiceImpl implements DocService {
     }
 
     @Override
-    public void addDocInfo(String position, String type, String serverFileName) throws Exception {
-        String[] nameArray = serverFileName.split(" / ");
+    public void addDocInfo(String position, List<File> uploadList) throws Exception {
         String[] positionArray = position.split("_");
-        String docFileName = nameArray[0];
-        String serverStorageName = nameArray[1];
-        String docFileType = type;
         String unit = positionArray[0];
         String pos = positionArray[1];
-        String storagePath = "doc/" + serverStorageName;
 
-        DocFileInfoDto docFileInfo = new DocFileInfoDto(docFileName, unit, pos, storagePath);
-        docDao.addDocInfo(docFileInfo);
+        for(int i = 0; i < uploadList.size(); i++) {
+            String docFilename = uploadList.get(i).getFileName();
+            String storagePath = uploadList.get(i).getStoragePath();
+            DocFileInfoDto docFile = new DocFileInfoDto(docFilename, unit, pos, storagePath);
+            docDao.addDocInfo(docFile);
+        }
     }
 
     @Override

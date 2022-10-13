@@ -21,6 +21,7 @@ public class PositionServiceImpl implements PositionService {
     PositionDao positionDao;
     @Override
     public HashMap<String, List<PositionInfoDto>> getPositionList() throws Exception {
+        List<PositionInfoDto> unitPublicPosList = positionDao.getPositionList("公共");
         List<PositionInfoDto> unitPianyePosList = positionDao.getPositionList("制叶");
         List<PositionInfoDto> unitHongsiPosList = positionDao.getPositionList("制丝");
         List<PositionInfoDto> unitCanpeijiaxiangPosList = positionDao.getPositionList("掺配加香");
@@ -30,6 +31,7 @@ public class PositionServiceImpl implements PositionService {
         List<PositionInfoDto> unitTangliaochufangPosList = positionDao.getPositionList("糖料厨房");
 
         HashMap<String, List<PositionInfoDto>> positionMap = new HashMap<String, List<PositionInfoDto>>();
+        positionMap.put("unit_public_posList", unitPublicPosList);
         positionMap.put("unit_pianye_posList", unitPianyePosList);
         positionMap.put("unit_hongsi_posList", unitHongsiPosList);
         positionMap.put("unit_canpeijiaxiang_posList", unitCanpeijiaxiangPosList);

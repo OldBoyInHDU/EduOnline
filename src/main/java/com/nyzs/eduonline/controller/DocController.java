@@ -1,7 +1,10 @@
 package com.nyzs.eduonline.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import com.nyzs.eduonline.bean.dto.DocFileInfoDto;
+import com.nyzs.eduonline.bean.dto.File;
+import com.nyzs.eduonline.bean.vo.DocFileVo;
 import com.nyzs.eduonline.service.DocService;
 import com.nyzs.eduonline.bean.vo.ResponseResult;
 import com.nyzs.eduonline.service.UploadService;
@@ -78,11 +81,17 @@ public class DocController {
 //    @CrossOrigin(origins = "*",maxAge = 3600)
     @RequestMapping(value = "/docUpload/submitDocInfo", method = RequestMethod.POST)
     public ResponseResult submitDocInfo(
-            @RequestParam(name = "position", required = true, defaultValue = "未指定") String position,
-            @RequestParam(name = "type", required = true, defaultValue = "未指定") String type,
-            @RequestParam(name = "serverFileName")String serverFileName) {
+            String position,
+            String uploadListStr
+//            @RequestBody List<File> uploadList 前端直接传list才能接收到，json化的接收不到
+            ) {
         try {
-            docService.addDocInfo(position, type, serverFileName);
+            System.out.println(position);
+//            System.out.println("uploadListStr:" + uploadListStr);
+            List<File> uploadList = JSON.parseArray(uploadListStr, File.class);
+//            System.out.println("uploadList:" + uploadList);
+
+            docService.addDocInfo(position, uploadList);
             return ResponseResult.ok("提交成功");
         } catch (Exception e) {
             logger.error("程序错误", e);
