@@ -2,6 +2,7 @@ package com.nyzs.eduonline.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.nyzs.eduonline.bean.dto.DocFileInfoDto;
+import com.nyzs.eduonline.bean.dto.File;
 import com.nyzs.eduonline.bean.dto.VideoFileInfoDto;
 import com.nyzs.eduonline.dao.VideoDao;
 import com.nyzs.eduonline.service.VideoService;
@@ -28,17 +29,17 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public void addVideoInfo(String position, String serverFileName) throws Exception {
-        String[] nameArray = serverFileName.split(" / ");
+    public void addVideoInfo(String position, List<File> uploadList) throws Exception {
         String[] positionArray = position.split("_");
-        String videoFileName = nameArray[0];
-        String serverStorageName = nameArray[1];
         String unit = positionArray[0];
         String pos = positionArray[1];
-        String storagePath = "video/" + serverStorageName;
 
-        VideoFileInfoDto videoFileInfoDto = new VideoFileInfoDto(videoFileName, unit, pos, storagePath);
-        videoDao.addVideoInfo(videoFileInfoDto);
+        for(int i = 0; i < uploadList.size(); i++) {
+            String docFilename = uploadList.get(i).getFileName();
+            String storagePath = uploadList.get(i).getStoragePath();
+            VideoFileInfoDto vidFile = new VideoFileInfoDto(docFilename, unit, pos, storagePath);
+            videoDao.addVideoInfo(vidFile);
+        }
     }
 
     @Override

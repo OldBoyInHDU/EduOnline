@@ -1,6 +1,8 @@
 package com.nyzs.eduonline.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
+import com.nyzs.eduonline.bean.dto.File;
 import com.nyzs.eduonline.bean.dto.VideoFileInfoDto;
 import com.nyzs.eduonline.bean.vo.ResponseResult;
 import com.nyzs.eduonline.service.UploadService;
@@ -66,15 +68,23 @@ public class VideoController {
 
     @RequestMapping(value = "/videoUpload/submitVideoInfo", method = RequestMethod.POST)
     public ResponseResult submitVideoInfo(
-            @RequestParam(name = "position", required = true, defaultValue = "未指定") String position,
-            @RequestParam(name = "serverFileName") String serverFileName) {
+            String position,
+            String uploadListStr
+//            @RequestBody List<File> uploadList 前端直接传list才能接收到，json化的接收不到
+    ) {
         try {
-            videoService.addVideoInfo(position, serverFileName);
+            System.out.println(position);
+//            System.out.println("uploadListStr:" + uploadListStr);
+            List<File> uploadList = JSON.parseArray(uploadListStr, File.class);
+//            System.out.println("uploadList:" + uploadList);
+
+            videoService.addVideoInfo(position, uploadList);
             return ResponseResult.ok("提交成功");
         } catch (Exception e) {
             logger.error("程序错误", e);
             return ResponseResult.failed(e.getMessage(), "提交失败");
         }
+
     }
 
     @RequestMapping(value = "/videoManage/deleteVideoInfo", method = RequestMethod.DELETE)

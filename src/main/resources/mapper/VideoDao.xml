@@ -12,8 +12,8 @@
         <result column="video_file_name" property="videoFileName"/>
         <result column="unit" property="unit"/>
         <result column="position" property="position"/>
-        <result column="video_storage_path" property="storagePath"/>
-        <result column="last_update_date" property="uploadDate"/>
+        <result column="storage_path" property="storagePath"/>
+        <result column="upload_date" property="uploadDate"/>
 
     </resultMap>
 
@@ -25,19 +25,19 @@
             video_file_name,
             unit,
             position,
-            video_storage_path,
-            last_update_date
+            storage_path,
+            upload_date
         from
-        page_info pi
+        video_file_info vfi
         <where>
             <if test="pos!=null and pos!='' ">
-                pi.position LIKE CONCAT(CONCAT('%', #{pos}),'%')
+                vfi.position LIKE CONCAT(CONCAT('%', #{pos}),'%')
             </if>
             <if test="title!= null and title!= '' ">
-                AND pi.video_file_name LIKE CONCAT(CONCAT('%', #{title}),'%')
+                AND vfi.video_file_name LIKE CONCAT(CONCAT('%', #{title}),'%')
             </if>
         </where>
-        order by last_update_date desc
+        order by upload_date desc
     </select>
 
     <insert id="addVideoInfo" parameterType="com.nyzs.eduonline.bean.dto.VideoFileInfoDto">
