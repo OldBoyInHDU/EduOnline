@@ -1,6 +1,8 @@
 package com.nyzs.eduonline.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.nyzs.eduonline.bean.dto.DocFileInfoDto;
+import com.nyzs.eduonline.bean.dto.File;
 import com.nyzs.eduonline.bean.vo.ResponseResult;
 import com.nyzs.eduonline.service.DocService;
 import com.nyzs.eduonline.service.SocService;
@@ -70,6 +72,39 @@ public class SocController {
         } catch (IOException e) {
             logger.error("程序错误", e);
             return ResponseResult.failed(e.getMessage(),"文档上传失败");
+        }
+
+    }
+
+    @RequestMapping(value = "/socUpload/submitSocInfo", method = RequestMethod.POST)
+    public ResponseResult submitSocInfo(
+            String position,
+            String uploadListStr
+//            @RequestBody List<File> uploadList 前端直接传list才能接收到，json化的接收不到
+    ) {
+        try {
+            System.out.println(position);
+//            System.out.println("uploadListStr:" + uploadListStr);
+            List<File> uploadList = JSON.parseArray(uploadListStr, File.class);
+//            System.out.println("uploadList:" + uploadList);
+
+            socService.addSocInfo(position, uploadList);
+            return ResponseResult.ok("提交成功");
+        } catch (Exception e) {
+            logger.error("程序错误", e);
+            return ResponseResult.failed(e.getMessage(), "提交失败");
+        }
+
+    }
+
+    @RequestMapping(value = "/socManage/deleteSocInfo", method = RequestMethod.DELETE)
+    public ResponseResult deleteSocInfo(Integer id) {
+        try {
+            socService.deleteSocInfo(id);
+            return ResponseResult.ok("删除成功");
+        } catch (Exception e) {
+            logger.error("程序错误", e);
+            return ResponseResult.failed(e.getMessage(), "删除失败");
         }
 
     }
