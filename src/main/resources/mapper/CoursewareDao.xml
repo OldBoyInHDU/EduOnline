@@ -9,22 +9,23 @@
 
     <resultMap type="com.nyzs.eduonline.bean.dto.CoursewareInfoDto" id="coursewareInfoDtoMap">
         <id column="id" property="id"/>
+        <result column="seminar" property="seminar"/>
         <result column="courseware_name" property="coursewareName"/>
-<!--        <result column="unit" property="unit"/>-->
-<!--        <result column="position" property="position"/>-->
         <result column="storage_path" property="storagePath"/>
         <result column="upload_date" property="uploadDate"/>
-
     </resultMap>
 
 
     <!--    根据课件标题查询-->
-    <select id="getCoursewareByPosOrTitle" parameterType="String" resultType="com.nyzs.eduonline.bean.dto.CoursewareInfoDto" resultMap="coursewareInfoDtoMap">
+    <select id="getCoursewareBySeminarOrTitle" parameterType="String" resultType="com.nyzs.eduonline.bean.dto.CoursewareInfoDto" resultMap="coursewareInfoDtoMap">
         select
-        *
+            *
         from
-        courseware_info ci
+            courseware_info ci
         <where>
+            <if test="seminar!= null and seminar!= '' ">
+                ci.seminar LIKE CONCAT(CONCAT('%', #{seminar}),'%')
+            </if>
             <if test="title!= null and title!= '' ">
                 ci.courseware_name LIKE CONCAT(CONCAT('%', #{title}),'%')
             </if>
@@ -38,12 +39,14 @@
             courseware_info
         (
             id,
+            seminar,
             courseware_name,
             storage_path,
             upload_date
         )
         values (
                    id,
+                   #{seminar},
                    #{coursewareName},
                    #{storagePath},
                    DATE_FORMAT(NOW(), '%Y-%m-%d')

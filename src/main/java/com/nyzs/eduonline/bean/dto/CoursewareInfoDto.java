@@ -11,19 +11,32 @@ import java.util.Date;
  */
 public class CoursewareInfoDto {
     private int id;
+    private String seminar;
     private String coursewareName;
     private String storagePath;
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date uploadDate;
 
+    public CoursewareInfoDto() {
+    }
+
     @Override
     public String toString() {
         return "CoursewareInfoDto{" +
                 "id=" + id +
+                ", seminar='" + seminar + '\'' +
                 ", coursewareName='" + coursewareName + '\'' +
                 ", storagePath='" + storagePath + '\'' +
                 ", uploadDate=" + uploadDate +
                 '}';
+    }
+
+    public String getSeminar() {
+        return seminar;
+    }
+
+    public void setSeminar(String seminar) {
+        this.seminar = seminar;
     }
 
     public int getId() {
@@ -58,7 +71,8 @@ public class CoursewareInfoDto {
         this.uploadDate = uploadDate;
     }
 
-    public CoursewareInfoDto(String coursewareName, String storagePath) {
+    public CoursewareInfoDto(String seminar, String coursewareName, String storagePath) {
+        this.seminar = seminar;
         this.coursewareName = coursewareName;
         this.storagePath = storagePath;
     }

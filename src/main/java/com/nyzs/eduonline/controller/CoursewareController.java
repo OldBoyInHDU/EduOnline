@@ -1,7 +1,9 @@
 package com.nyzs.eduonline.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import com.nyzs.eduonline.bean.dto.CoursewareInfoDto;
+import com.nyzs.eduonline.bean.dto.File;
 import com.nyzs.eduonline.bean.vo.ResponseResult;
 import com.nyzs.eduonline.service.CoursewareService;
 import com.nyzs.eduonline.service.UploadService;
@@ -33,15 +35,10 @@ public class CoursewareController {
     UploadService uploadService;
 
     @RequestMapping(value = "/coursewareManage/getCoursewareByPosOrTitle")
-    public ResponseResult getCoursewareByPosOrTitle(String pos, String title) {
+    public ResponseResult getCoursewareByPosOrTitle(String seminar, String title) {
         List<CoursewareInfoDto> coursewareInfoDtoList = null;
         try {
-            //pos 传进来是  片叶_开箱
-            String position = "";
-            if(pos != null && pos!= "") {
-                position = pos.split("_")[1];
-            }
-            coursewareInfoDtoList = coursewareService.getCoursewareByPosOrTitle(position, title);
+            coursewareInfoDtoList = coursewareService.getCoursewareBySeminarOrTitle(seminar, title);
 //            PageInfo pageInfo = new PageInfo(coursewareInfoDtoList);
             return ResponseResult.ok(coursewareInfoDtoList, "课件列表查询成功");
         } catch (Exception e) {
@@ -66,10 +63,18 @@ public class CoursewareController {
     }
 
     @RequestMapping(value = "/coursewareUpload/submitCoursewareInfo", method = RequestMethod.POST)
-    public ResponseResult submitCoursewareInfo(
-            @RequestParam(name = "serverFileName")String serverFileName) {
+    public ResponseResult submitDocInfo(
+            String seminar,
+            String uploadListStr
+//            @RequestBody List<File> uploadList 前端直接传list才能接收到，json化的接收不到
+    ) {
         try {
-            coursewareService.addCoursewareInfo(serverFileName);
+            System.out.println(seminar);
+//            System.out.println("uploadListStr:" + uploadListStr);
+            List<File> uploadList = JSON.parseArray(uploadListStr, File.class);
+//            System.out.println("uploadList:" + uploadList);
+
+            coursewareService.addCoursewareInfo(seminar, uploadList);
             return ResponseResult.ok("提交成功");
         } catch (Exception e) {
             logger.error("程序错误", e);

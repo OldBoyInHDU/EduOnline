@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface CoursewareDao {
-    List<CoursewareInfoDto> getCoursewareByPosOrTitle(String pos, String title) throws Exception;
+    List<CoursewareInfoDto> getCoursewareBySeminarOrTitle(String seminar, String title) throws Exception;
 
     void addCoursewareInfo(CoursewareInfoDto coursewareInfoDto) throws Exception;
 
